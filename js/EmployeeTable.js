@@ -3,7 +3,8 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 const createInnerHTML = () => {
-    const innerHtml = `
+    let employeePayrollList = createEmployeePayrollJson();
+    const headerHtml = `
     <tr>
         <th></th>
         <th>Name</th>
@@ -12,27 +13,68 @@ const createInnerHTML = () => {
         <th>Salary</th>
         <th>Start Date</th>
         <th>Actions</th>
-    </tr>
-    <tr>
+    </tr>`;
+
+    let innerHtml = `${headerHtml}`;
+    // const innerHtml = ` ${headerHtml}
+    for(const employeePayrollData of employeePayrollList){
+        innerHtml = `${innerHtml}
+        <tr>
         <td>
-            <img class="profile" src="../assets/profile-images/Ellipse -2.png" alt="">
+            <img class="profile" alt="profileImage" src="${employeePayrollData._profilePic}">
         </td>
-        <td>Rahul Patil</td>
-        <td>Male</td>
+        <td>${employeePayrollData._name}</td>
+        <td>${employeePayrollData._gender}</td>
         <td>
-            <div class="dept-label">Engineer</div>
-            <div class="dept-label">Finance</div>
+            ${getDeptHtml(employeePayrollData._department)}
         </td>
-        <td>500000</td>
-        <td>1 Nov 2022</td>
+        <td>${employeePayrollData._salary}</td>
+        <td>${employeePayrollData._startDate}</td>
         <td>
-            <img id="1" onclick="remove(this)"
-                src="../assets/icons/delete-black-18dp.svg"
-                alt="delete">
-            <img id="1" onclick="update(this)"
-                src="../assets/icons/create-black-18dp.svg" alt="edit">
+            <img name="${employeePayrollData._id}" alt="edit" src="../assets/icons/create-black-18dp.svg">
+            <img name="${employeePayrollData._id}" alt="delete" src="../assets/icons/delete-black-18dp.svg">
         </td>
-    </tr>
-    `;
+    </tr>`;
+    }
     document.querySelector('#display').innerHTML = innerHtml;
+}
+
+const createEmployeePayrollJson = () => {
+    let employeePayrollList = [
+        {
+            "id": new Date().getTime() +1,
+            "_name": "Rahul Patil",
+            "_gender": "Male",
+            "_department": [
+                "Finance",
+                "Engineer"
+            ],
+            "_salary": "500000",
+            "_startDate": "01 Aug 2022",
+            "_note": "All In One",
+            "_profilePic": "../assets/profile-images/Ellipse -3.png"
+        },
+        {
+            "id": new Date().getTime() +1,
+            "_name": "Terrisa M",
+            "_gender": "Female",
+            "_department": [
+                "Engineer"
+            ],
+            "_salary": "500000",
+            "_startDate": "29 July 2022",
+            "_note": "Terrific Engineer",
+            "_profilePic": "../assets/profile-images/Ellipse -1.png"
+        }
+        
+    ];
+    return employeePayrollList;
+}
+
+const getDeptHtml = (deptList) => {
+    let deptHtml = '';
+    for (const dept of deptList) {
+        deptHtml = `${deptHtml} <div class="dept-label">${dept}</div>`
+    }
+    return deptHtml;
 }
