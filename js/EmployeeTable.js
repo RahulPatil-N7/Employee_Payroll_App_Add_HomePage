@@ -14,9 +14,7 @@ const createInnerHTML = () => {
         <th>Start Date</th>
         <th>Actions</th>
     </tr>`;
-
     let innerHtml = `${headerHtml}`;
-    // const innerHtml = ` ${headerHtml}
     for(const employeePayrollData of employeePayrollList){
         innerHtml = `${innerHtml}
         <tr>
@@ -51,7 +49,7 @@ const createEmployeePayrollJson = () => {
             ],
             "_salary": "500000",
             "_startDate": "01 Aug 2022",
-            "_note": "All In One",
+            "_note": "Welcome!",
             "_profilePic": "../assets/profile-images/Ellipse -3.png"
         },
         {
@@ -62,8 +60,8 @@ const createEmployeePayrollJson = () => {
                 "Engineer"
             ],
             "_salary": "500000",
-            "_startDate": "29 July 2022",
-            "_note": "Terrific Engineer",
+            "_startDate": "20 Aug 2022",
+            "_note": "Welcome!",
             "_profilePic": "../assets/profile-images/Ellipse -1.png"
         }
         
