@@ -1,9 +1,17 @@
+let employeePayrollList;
 window.addEventListener('DOMContentLoaded', () => {
+    employeePayrollList = getEmployeeDataFromStorage();
+    document.querySelector('.emp-count').textContent = employeePayrollList.length;
     createInnerHTML();
-});
+})
+
+const getEmployeeDataFromStorage = () => {
+    return localStorage.getItem('EmployeePayrollList')
+        ? JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+}
 
 const createInnerHTML = () => {
-    let employeePayrollList = createEmployeePayrollJson();
+    if (employeePayrollList.length == 0) return;
     const headerHtml = `
     <tr>
         <th></th>
@@ -14,8 +22,9 @@ const createInnerHTML = () => {
         <th>Start Date</th>
         <th>Actions</th>
     </tr>`;
+
     let innerHtml = `${headerHtml}`;
-    for(const employeePayrollData of employeePayrollList){
+    for (const employeePayrollData of employeePayrollList) {
         innerHtml = `${innerHtml}
         <tr>
         <td>
@@ -29,8 +38,10 @@ const createInnerHTML = () => {
         <td>${employeePayrollData._salary}</td>
         <td>${employeePayrollData._startDate}</td>
         <td>
-            <img name="${employeePayrollData._id}" alt="edit" src="../assets/icons/create-black-18dp.svg">
-            <img name="${employeePayrollData._id}" alt="delete" src="../assets/icons/delete-black-18dp.svg">
+            <img name="${employeePayrollData._id}" onclick="update(this)" alt="edit" 
+            src="../assets/icons/create-black-18dp.svg">
+            <img name="${employeePayrollData._id}" onclick="remove(this)" alt="delete" 
+            src="../assets/icons/delete-black-18dp.svg">
         </td>
     </tr>`;
     }
@@ -39,31 +50,6 @@ const createInnerHTML = () => {
 
 const createEmployeePayrollJson = () => {
     let employeePayrollList = [
-        {
-            "id": new Date().getTime() +1,
-            "_name": "Rahul Patil",
-            "_gender": "Male",
-            "_department": [
-                "Finance",
-                "Engineer"
-            ],
-            "_salary": "500000",
-            "_startDate": "01 Aug 2022",
-            "_note": "Welcome!",
-            "_profilePic": "../assets/profile-images/Ellipse -3.png"
-        },
-        {
-            "id": new Date().getTime() +1,
-            "_name": "Terrisa M",
-            "_gender": "Female",
-            "_department": [
-                "Engineer"
-            ],
-            "_salary": "500000",
-            "_startDate": "20 Aug 2022",
-            "_note": "Welcome!",
-            "_profilePic": "../assets/profile-images/Ellipse -1.png"
-        }
         
     ];
     return employeePayrollList;
