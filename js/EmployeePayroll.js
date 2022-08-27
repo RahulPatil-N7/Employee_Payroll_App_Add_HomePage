@@ -12,7 +12,6 @@ class EmployeePayroll {
     }
     
     set name(name) {
-        console.log("inside setter");
         const nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
         if (nameRegex.test(name)) {
             this._name=name;
