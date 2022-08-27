@@ -10,6 +10,7 @@ class EmployeePayroll {
     get name() {
         return this._name;
     }
+    
     set name(name) {
         console.log("inside setter");
         const nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
@@ -20,7 +21,7 @@ class EmployeePayroll {
         }
     }
 
-    get profilePic(){
+    get profilePic() {
         return this._profilePic;
     }
     

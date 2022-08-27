@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
     employeePayrollList = getEmployeeDataFromStorage();
     document.querySelector('.emp-count').textContent = employeePayrollList.length;
     createInnerHTML();
-})
+});
 
 const getEmployeeDataFromStorage = () => {
     return localStorage.getItem('EmployeePayrollList')
@@ -28,7 +28,7 @@ const createInnerHTML = () => {
         innerHtml = `${innerHtml}
         <tr>
         <td>
-            <img class="profile" alt="profileImage" src="${employeePayrollData._profilePic}">
+            <img class="profile" alt="profile" src="${employeePayrollData._profilePic}">
         </td>
         <td>${employeePayrollData._name}</td>
         <td>${employeePayrollData._gender}</td>
