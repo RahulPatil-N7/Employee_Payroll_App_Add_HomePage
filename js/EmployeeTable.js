@@ -3,7 +3,8 @@ window.addEventListener('DOMContentLoaded', () => {
     employeePayrollList = getEmployeeDataFromStorage();
     document.querySelector('.emp-count').textContent = employeePayrollList.length;
     createInnerHTML();
-})
+    localStorage.removeItem('edit-emp');
+});
 
 const getEmployeeDataFromStorage = () => {
     return localStorage.getItem('EmployeePayrollList')
@@ -38,8 +39,7 @@ const createInnerHTML = () => {
         <td>${employeePayrollData._salary}</td>
         <td>${employeePayrollData._startDate}</td>
         <td>
-            <img name="${employeePayrollData._id}" onClick="update(this)" alt="edit" 
-            src="../assets/icons/create-black-18dp.svg">
+            <img id="${employeePayrollData._id}" alt="edit" src="../assets/icons/create-black-18dp.svg" onClick=update(this)>
             <img id="${employeePayrollData._id}" alt="delete" src="../assets/icons/delete-black-18dp.svg" onClick=remove(this)>
         </td>
     </tr>`;
@@ -69,4 +69,12 @@ const remove = (data) => {
     localStorage.setItem('EmployeePayrollList', JSON.stringify(employeePayrollList));
     document.querySelector('.emp-count').textContent = employeePayrollList.length;
     createInnerHTML();
+}
+
+const update = (data) => {
+    let employeeData = employeePayrollList.find(empData => empData._id == data.id);
+    if (!employeeData)
+        return;
+    localStorage.setItem('edit-emp', JSON.stringify(employeeData));
+    window.location.replace(site_properties.payroll);
 }
